@@ -1,0 +1,8 @@
+cd ../proxily
+yarn build
+rm -rf node_modules
+cd ../react18
+yarn upgrade proxily
+cd ../proxily
+yarn install
+cd ../react18

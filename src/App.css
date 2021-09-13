@@ -36,3 +36,27 @@
     transform: rotate(360deg);
   }
 }
+.platformSelect {
+  padding: 1em;
+}
+.platformSelect span, .demoSelect span {
+  padding: 8px;
+  padding-bottom: 10px;
+}
+.demoSelect {
+  padding: 1em;
+  padding-top: 0em;
+  margin-bottom: 1em;
+  border-bottom: 1px solid #e0e0e0;
+}
+.platformSelect span.selected, .demoSelect span.selected {
+  background-color: #282c34;
+  border-radius: 4px;
+}
+.platformSelect span.title, .demoSelect span.title{
+  min-width: 140px;
+  display: inline-block;
+  text-align: right;
+  padding-right: 20px;
+  font-weight: bold;
+}

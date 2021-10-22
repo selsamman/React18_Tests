@@ -1,7 +1,6 @@
-import React, { startTransition, useState, memo } from "react";
-import ReactDOM from "react-dom";
+import React, {  memo } from "react";
 import "../styles.css";
-import {observable, observer, setLogLevel, useObservableTransition, useTransactable, useTransaction} from 'proxily';
+import {observable, observer, useObservableTransition} from 'proxily';
 let l = console.log;
 let renders = 0;
 
@@ -9,7 +8,7 @@ const state = observable({
     result: {text : "hello"},
     input: {text : "hello"}
 });
-setLogLevel({transitions: true});
+
 
 const UseTransition = observer(function App() {
 

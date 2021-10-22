@@ -1,17 +1,16 @@
-import React, {Suspense} from "react";
-import ReactDOM from "react-dom";
+import React, {Suspense, useRef} from "react";
 import "../styles.css";
 import {
     observer,
     observable,
     useObservableTransition,
     suspendable,
-    setLogLevel,
 } from "proxily";
 import {fetchPosts, fetchUser} from "../Native/fakeApi";
 
 
 const state = observable({
+    count: 0,
     userId: 0,
     get user() {
         return fetchUser(this.userId);
@@ -28,12 +27,12 @@ function getNextId(id) {
   return id === 3 ? 0 : id + 1;
 }
 
-const FApp = observer (function App() {
+function LongTransition() {
    const [isPending, startObservableTransition] = useObservableTransition({});
    console.log(`Rendering App isPending ${isPending}`);
    return (
       <>
-          <h2>Long Transition with useObservableStartTransition</h2>
+          <h2>Long Transition with useObservableStartTransition {state.userId} {state.count}</h2>
         <button disabled={isPending}
             onClick={() => {
               startObservableTransition(() => {
@@ -43,10 +42,11 @@ const FApp = observer (function App() {
         >
           Next
         </button>
+        <button onClick={()=>++state.count}>Bump</button>
         <ProfilePage />
       </>
   );
-});
+};
 
 const ProfilePage = observer(function ProfilePage() {
   return (
@@ -61,14 +61,14 @@ const ProfilePage = observer(function ProfilePage() {
         </Suspense>
       </Suspense>
   );
-})
+},{memo: false})
 
 const ProfileDetails = observer(function ProfileDetails() {
   console.log(`Render ProfilePage`);
   const {user} = state;
   console.log(`Render ProfilePage ${user.name}`);
   return <h1>{user.name}</h1>;
-});
+}, {memo: false});
 
 const ProfileTimeline = observer(function ProfileTimeline() {
     console.log(`Render ProfileTimeline`);
@@ -81,18 +81,6 @@ const ProfileTimeline = observer(function ProfileTimeline() {
         ))}
       </ul>
   );
-});
+}, {memo: false});
 
-function App () {
-    return (
-        <>
-            <Unrelated />
-            <FApp />
-        </>
-    )
-}
-const Unrelated = observer(function Unrelated () {
-    console.log('Rendering Unrelated');
-    return (<></>);
-});
-export default observer(App);
+export default observer(LongTransition);

@@ -9,8 +9,8 @@
     "mobx": "6.3.2",
     "mobx-react-lite": "3.2.0",
     "proxily": "file:../proxily",
-    "react": "react@alpha",
-    "react-dom": "^react-dom@alpha",
+    "react": "18.0.0-alpha-fd5e01c2e-20210913",
+    "react-dom": "18.0.0-alpha-fd5e01c2e-20210913",
     "react-scripts": "4.0.3",
     "web-vitals": "^1.0.1"
   },

@@ -1,11 +1,10 @@
-import React, {startTransition, useState, memo, useLayoutEffect, useContext} from "react";
-import ReactDOM from "react-dom";
+import React, {startTransition, useState, memo, useContext} from "react";
 import "../styles.css";
 let l = console.log;
-let inRender = false;
+
 const SlowTextContext = React.createContext("");
 const UseTransition = function App() {
-  inRender = true; useLayoutEffect(()=>{inRender = false; return ()=>false});
+
   const [text, setText] = useState("hello");
   const [slowText, setSlowText] = useState(text);
 
@@ -52,7 +51,6 @@ const DelayedInput = () => {
 }
 const MySlowList =  memo (() => {
     const text = useContext(SlowTextContext);
-    inRender = true; useLayoutEffect(()=>{inRender = false; return ()=>false});
     l("render slowlist");
     let items = [];
     for (let i = 0; i < 50; i++) {
@@ -69,7 +67,6 @@ const MySlowList =  memo (() => {
 });
 
 function ListItem({ children }) {
-    inRender = true; useLayoutEffect(()=>{inRender = false; return ()=>false});
     let now = performance.now();
     while (performance.now() - now < 10) {
         // Note: this is an INTENTIONALLY EMPTY loop that

@@ -1,12 +1,12 @@
 import React, {
-  useState,
-  useTransition,
-  Suspense
+    useState, useTransition,
+    Suspense, useRef
 } from "react";
-import ReactDOM from "react-dom";
+
 
 import "../styles.css";
 import { fetchProfileData } from "./fakeApi";
+
 
 function getNextId(id) {
   return id === 3 ? 0 : id + 1;
@@ -14,20 +14,29 @@ function getNextId(id) {
 
 const initialResource = fetchProfileData(0);
 
-function App() {
+function FApp() {
   const [resource, setResource] = useState(
       initialResource
   );
+  const [count, setCount] = useState(0);
   const [
     isPending,
     startTransition
   ] = useTransition({
     timeoutMs: 3000
   });
+  const ref = useRef(true);
+  if (!ref.current)
+      ref.current = 1;
+  else
+      ref.current++
+  console.log(`ref = ${ref.current}`);
+
+
     console.log(`Rendering App isPending ${isPending}`);
   return (
       <>
-          <h2>Long Transition with useStartTransition</h2>
+          <h2>Long Transition with useStartTransition! {count}</h2>
         <button
             onClick={() => {
               startTransition(() => {
@@ -42,6 +51,7 @@ function App() {
         >
           Next
         </button>
+          <button onClick={() => setCount(count + 1)}>Bump</button>
         <ProfilePage resource={resource} />
       </>
   );
@@ -80,5 +90,17 @@ function ProfileTimeline({ resource }) {
         ))}
       </ul>
   );
+}
+const Unrelated = function Unrelated () {
+    console.log('Rendering Unrelated');
+    return (<></>);
+};
+function App () {
+    return (
+        <>
+            <Unrelated />
+            <FApp />
+        </>
+    )
 }
 export default App;

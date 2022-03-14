@@ -4,7 +4,7 @@ import {
     observer,
     observable,
     useObservableTransition,
-    suspendable,
+    suspendable, getCurrentValue,
 } from "proxily";
 import {fetchPosts, fetchUser} from "../Native/fakeApi";
 
@@ -28,11 +28,11 @@ function getNextId(id) {
 }
 
 function LongTransition() {
-   const [isPending, startObservableTransition] = useObservableTransition({});
+   const [isPending, startObservableTransition] = useObservableTransition();
    console.log(`Rendering App isPending ${isPending}`);
    return (
       <>
-          <h2>Long Transition with useObservableStartTransition {state.userId} {state.count}</h2>
+          <h2>Long Transition with useObservableStartTransition {getCurrentValue(state, state => state.count)}</h2>
         <button disabled={isPending}
             onClick={() => {
               startObservableTransition(() => {

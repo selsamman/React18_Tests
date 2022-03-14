@@ -15,42 +15,35 @@ const UseTransition = function App() {
       l("setting " + e.target.value);
     });
   }
-    l("Render App " + text + " " + slowText);
+    l("Render App text=" + text + " slowText=" + slowText);
 
     return (
-        <SlowTextContext.Provider value={slowText}>
-            <div className="App">
-                <h2>Responsive Input  - startTransition</h2>
-                <label>
-                    Type into the input: <input value={text} onChange={handleChange}/>
-                </label>
-                <p style={{background: slowText !== text ? "yellow" : ""}}>
-                    <DelayedInput />
-                </p>
-                <p>
-                    Even though{" "}
-                    <b>
-                        each list item in this demo artificially blocks the main thread for 3
-                        milliseconds
-                    </b>
-                    , the app is able to stay responsive.
-                </p>
-                <hr/>
-                <MySlowList text={slowText}/>
-            </div>
-        </SlowTextContext.Provider>
+
+        <div className="App">
+            <h2>Responsive Input  - startTransition</h2>
+            <label>
+                Type into the input: <input value={text} onChange={handleChange}/>
+            </label>
+            <p style={{background: slowText !== text ? "yellow" : ""}}>
+                text={text} slowText={slowText}
+            </p>
+            <p>
+                Even though{" "}
+                <b>
+                    each list item in this demo artificially blocks the main thread for 3
+                    milliseconds
+                </b>
+                , the app is able to stay responsive.
+            </p>
+            <hr/>
+            <MySlowList text={slowText}/>
+        </div>
+
     )
 }
-const DelayedInput = () => {
-    const slowText = useContext(SlowTextContext);
-    return (
-        <span>
-            Delayed Input: <b>{slowText}</b>
-        </span>
-    )
-}
-const MySlowList =  memo (() => {
-    const text = useContext(SlowTextContext);
+
+const MySlowList =  memo (({text}) => {
+
     l("render slowlist");
     let items = [];
     for (let i = 0; i < 50; i++) {

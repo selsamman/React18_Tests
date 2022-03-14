@@ -6,23 +6,20 @@ let l = console.log;
 const SlowTextContext = React.createContext("");
 const UseTransition = function App() {
   const [text, setText] = useState("hello");
-  const slowText = useDeferredValue(text);
+  const deferredText = useDeferredValue(text);
 
   function handleChange(e) {
+      l("setText=" + e.target.value);
     setText(e.target.value);
   }
-    l("Render App " + text + " deferredState " + slowText);
+    l("Render App current=" + text + " deferred=" + deferredText);
 
     return (
-        <SlowTextContext.Provider value={slowText}>
             <div className="App">
                 <h2>Responsive Input  - useDeferredState</h2>
                 <label>
                     Type into the input: <input value={text} onChange={handleChange}/>
                 </label>
-                <p style={{background: slowText !== text ? "yellow" : ""}}>
-                    <DelayedInput />
-                </p>
                 <p>
                     Even though{" "}
                     <b>
@@ -32,21 +29,13 @@ const UseTransition = function App() {
                     , the app is able to stay responsive.
                 </p>
                 <hr/>
-                <MySlowList text={slowText}/>
+                <MySlowList text={deferredText}/>
             </div>
-        </SlowTextContext.Provider>
+
     )
 }
-const DelayedInput = () => {
-    const slowText = useContext(SlowTextContext);
-    return (
-        <span>
-            Delayed Input: <b>{slowText}</b>
-        </span>
-    )
-}
-const MySlowList =  memo (() => {
-    const text = useContext(SlowTextContext);
+
+const MySlowList =  memo (({text}) => {
     l("render slowlist");
     let items = [];
     for (let i = 0; i < 50; i++) {

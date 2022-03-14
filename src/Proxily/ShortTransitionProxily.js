@@ -17,6 +17,13 @@ const UseTransition = observer(function App() {
         state.input.text = e.target.value;
         startTransition(() => {
             state.result.text = e.target.value;
+            /*
+            React will start rendering off-screen.  The off-screen version will get state with new result.text
+            while the on-screen will get state with old result.text  During this transition the input control
+            displays updated value so the user gets immediate feedback.  Eventually the off-screen components are
+            moved on-screen and the lists appear to catch up.  Note that this distinction is only possible
+            because result and input are objects which have independent snapshots.
+            */
         });
       }
   l(`Render App (${++renders}) -- input: ${state.input.text} result: ${state.result.text}`);

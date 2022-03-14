@@ -6706,6 +6706,11 @@ jest@26.6.0:
     import-local "^3.0.2"
     jest-cli "^26.6.0"
 
+js-freeze-dry@>=1:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/js-freeze-dry/-/js-freeze-dry-1.1.2.tgz#9efbc4914e4f64b96663e1a6915059fcd6186ce7"
+  integrity sha512-VKOe5FwBuMMR+lVPqeWtYww5dGRlRXxoRkR/OlwJY65yqyqNxj+0DQ9kOqc5hoc2uiYXiqG9hOJVzF2Vf/5Bsg==
+
 "js-tokens@^3.0.0 || ^4.0.0", js-tokens@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/js-tokens/-/js-tokens-4.0.0.tgz#19203fb59991df98e3a287050d4647cdeaf32499"
@@ -8889,8 +8894,12 @@ prop-types@^15.7.2:
     object-assign "^4.1.1"
     react-is "^16.8.1"
 
-"proxily@file:../proxily":
-  version "0.9.31-alpha"
+proxily@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/proxily/-/proxily-1.0.0.tgz#8ad27266171017628c1a4ed46e22da938d0641bb"
+  integrity sha512-12b+brA/pxcrHVutYgdh4Exd9zFtAu5mAdRBaf6gRHxjsEXwxFOEcjl0fz3DhOZ9RGu7gwT+pppIeyTRFg7kBQ==
+  dependencies:
+    js-freeze-dry ">=1"
 
 proxy-addr@~2.0.5:
   version "2.0.7"
@@ -9084,14 +9093,13 @@ react-dev-utils@^11.0.3:
     strip-ansi "6.0.0"
     text-table "0.2.0"
 
-react-dom@18.0.0-alpha-fd5e01c2e-20210913:
-  version "18.0.0-alpha-fd5e01c2e-20210913"
-  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-18.0.0-alpha-fd5e01c2e-20210913.tgz#4f09435d727a12fb2bc319daa43db313ac57e5a8"
-  integrity sha512-TC5tvZF9sspBjxETtTD7bKkc72drM9BIQvDI0GnSxIj4VKzq1i1aAJPZSdSKPOZ1kgqRrXWRFF5YTcgzOIC/Vw==
+react-dom@^18.0.0-rc.0:
+  version "18.0.0-rc.2-next-b9de50d2f-20220308"
+  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-18.0.0-rc.2-next-b9de50d2f-20220308.tgz#b8000dd5b86c77e0f2c4c069d01b279e34d6fcc2"
+  integrity sha512-5BXlUQVqACNjYtDZAM8fM9/QOJRJBD+DZlILPQ+MLvFuOBhz16lxXBXZnHMB0kuZJrKDXp8DLUeTyNn2B9pCYQ==
   dependencies:
     loose-envify "^1.1.0"
-    object-assign "^4.1.1"
-    scheduler "0.21.0-alpha-fd5e01c2e-20210913"
+    scheduler "0.21.0-rc.2-next-b9de50d2f-20220308"
 
 react-error-overlay@^6.0.9:
   version "6.0.9"
@@ -9179,13 +9187,12 @@ react-scripts@4.0.3:
   optionalDependencies:
     fsevents "^2.1.3"
 
-react@18.0.0-alpha-fd5e01c2e-20210913:
-  version "18.0.0-alpha-fd5e01c2e-20210913"
-  resolved "https://registry.yarnpkg.com/react/-/react-18.0.0-alpha-fd5e01c2e-20210913.tgz#3e67ccd4a41a187958788d416b6a19595b8669ab"
-  integrity sha512-SWeUmHARw0qSM8LcpGzpw3UbyCTVNcJTuCHmPIvgHMvZrs8R8wwk2nil5BQ+LZ8q0iNwwU0ilkLTWIqCQ5d44w==
+react@^18.0.0-rc.0:
+  version "18.0.0-rc.2-next-b9de50d2f-20220308"
+  resolved "https://registry.yarnpkg.com/react/-/react-18.0.0-rc.2-next-b9de50d2f-20220308.tgz#817d40520b76c3f3e8314eeda1abf85d9070465c"
+  integrity sha512-1RpONBLI/vgKN/kdq0DtPxrgXHS5OXCHbzXWXk2RcLRjlbBiqmAPUIpCq7x+02WhYQkgA6D0iRJo4NJ9fZMCGQ==
   dependencies:
     loose-envify "^1.1.0"
-    object-assign "^4.1.1"
 
 read-pkg-up@^3.0.0:
   version "3.0.0"
@@ -9659,13 +9666,12 @@ saxes@^5.0.1:
   dependencies:
     xmlchars "^2.2.0"
 
-scheduler@0.21.0-alpha-fd5e01c2e-20210913:
-  version "0.21.0-alpha-fd5e01c2e-20210913"
-  resolved "https://registry.yarnpkg.com/scheduler/-/scheduler-0.21.0-alpha-fd5e01c2e-20210913.tgz#b44ab3a8bddc6ed85ab4ec656419544288be4616"
-  integrity sha512-ylcV55/U6e67/3tjL16ognZk14UX/J4/C1N0XLZjqKV+XYS0QSxdwin/kdqxueCCbDLh0xLroq/G2lVTbFHP0Q==
+scheduler@0.21.0-rc.2-next-b9de50d2f-20220308:
+  version "0.21.0-rc.2-next-b9de50d2f-20220308"
+  resolved "https://registry.yarnpkg.com/scheduler/-/scheduler-0.21.0-rc.2-next-b9de50d2f-20220308.tgz#f3e89d3670b99adf1e1091644793bd73db03cbb0"
+  integrity sha512-aBVNOtcCn7k8FUi0lsIY34DZN1SUeuAjAQB6Y55Cxrhtrx9mggUepmF5gTWn7Z2RkEhQtrp7fzmRA/24bxxNJQ==
   dependencies:
     loose-envify "^1.1.0"
-    object-assign "^4.1.1"
 
 schema-utils@^1.0.0:
   version "1.0.0"

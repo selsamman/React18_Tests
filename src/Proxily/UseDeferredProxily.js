@@ -1,53 +1,56 @@
-import React, { memo } from "react";
+import React, {memo} from "react";
 import "../styles.css";
 import {
+    getCurrentValue,
     observable,
     observer,
-    useDeferredObservable,
+    useObservableTransition,
 
 } from 'proxily';
+
 let l = console.log;
 let renders = 0;
 
 const state = observable({
-    text : "hello",
+    text: "hello",
 });
 
 
 const Demo = observer(function App() {
 
-    const [slowText, setDeferredObservable] = useDeferredObservable(state.text);
-    function handleChange(e) {
-        state.text = e.target.value;
-        setDeferredObservable(() => {
-            state.text = e.target.value;
-        });
-      }
-  l(`Render App (${++renders}) -- input: ${state.text} result: ${slowText}`);
-  return (
-      <div className="App">
-          <h1>Responsive Input  - useDeferredObservable</h1>
-          <label>
-              Type into the input: <input value={state.text} onChange={handleChange}/>
-          </label>
-          <p style={{background: state.text !== slowText ? "yellow" : ""}}>
-              Delayed Input: <b>{slowText}</b>
-          </p>
-          <p>
-              Even though{" "}
-              <b>
-                  each list item in this demo artificially blocks the main thread for 3
-                  milliseconds
-              </b>
-              , the app is able to stay responsive.
-          </p>
-          <hr/>
-          <MySlowList text={slowText}/>
-      </div>
-  );
+    const [,startTransition] = useObservableTransition();
+    const handleChange = (e) => {
+        //state.text = e.target.value;
+        startTransition(() => state.text = e.target.value)
+    };
+    const currentText = getCurrentValue(state, state => state.text);
+
+    l("render app text=" + state.text + " currentText=" + currentText);
+
+    return (
+        <div className="App">
+            <h1>Responsive Input - useDeferredObservable</h1>
+            <label>
+                Type into the input: <input value={currentText} onChange={handleChange}/>
+            </label>
+            <p style={{background: state.text !== currentText ? "yellow" : ""}}>
+                text = {state.text} currentText = {currentText}
+            </p>
+            <p>
+                Even though{" "}
+                <b>
+                    each list item in this demo artificially blocks the main thread for 3
+                    milliseconds
+                </b>
+                , the app is able to stay responsive.
+            </p>
+            <hr/>
+            <MySlowList text={state.text}/>
+        </div>
+    );
 });
 
-const MySlowList =  memo (({ text }) => {
+const MySlowList = memo(({text}) => {
     l("render slowlist");
     let items = [];
     for (let i = 0; i < 50; i++) {
@@ -63,7 +66,7 @@ const MySlowList =  memo (({ text }) => {
     );
 });
 
-function ListItem({ children }) {
+function ListItem({children}) {
     let now = performance.now();
     while (performance.now() - now < 10) {
         // Note: this is an INTENTIONALLY EMPTY loop that
@@ -77,5 +80,6 @@ function ListItem({ children }) {
     //l("item", children);
     return <div className="ListItem">{children}</div>;
 }
+
 export default Demo;
 

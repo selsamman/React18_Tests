@@ -1,8 +1,5 @@
 cd ../proxily
 yarn build
-rm -rf node_modules
-cd ../react18
-yarn upgrade proxily
-cd ../proxily
-yarn install
-cd ../react18
+cd ../React18_Tests
+rm -rf ./node_modules/proxily/lib
+cp -r ../proxily/lib ./node_modules/proxily

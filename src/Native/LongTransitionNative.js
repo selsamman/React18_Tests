@@ -37,7 +37,7 @@ function FApp() {
   return (
       <>
           <h2>Long Transition with useStartTransition! {count}</h2>
-        <button
+        <button disabled={isPending}
             onClick={() => {
               startTransition(() => {
                 const nextUserId = getNextId(
